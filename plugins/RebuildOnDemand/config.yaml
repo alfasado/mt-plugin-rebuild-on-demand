@@ -1,0 +1,24 @@
+# DynamicMTML (C) 2010 Alfasado Inc.
+# This program is distributed under the terms of the
+# GNU General Public License, version 2.
+
+name: Rebuild On Demand
+id:   RebuildOnDemand
+key:  rebuildondemand
+author_name: Alfasado Inc.
+author_link: http://alfasado.net/
+description: <__trans phrase="Rebuild Page on demand.">
+version: 0.1
+schema_version: 0.11
+l10n_class: RebuildOnDemand::L10N
+
+config_settings:
+    RebuildLanguage:
+        default: PHP
+object_types:
+    template:
+        rebuild_od: boolean
+callbacks:
+    build_file_filter: $rebuildondemand::RebuildOnDemand::Plugin::_build_file_filter
+    MT::App::CMS::template_param.edit_template: $rebuildondemand::RebuildOnDemand::Plugin::_edit_template_param
+    MT::App::CMS::template_source.template_table: $rebuildondemand::RebuildOnDemand::Plugin::_template_table_source

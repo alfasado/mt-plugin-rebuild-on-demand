@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use strict;
+use lib qw( lib extlib );
+use MT;
+my $mt = MT->new();
+use MT::WeblogPublisher;
+use MT::FileInfo;
+my $id = $ARGV[0];
+my $force = $ARGV[1];
+my $pub = MT::WeblogPublisher->new;
+my $fi = MT::FileInfo->load( $id );
+if (! $force ) {
+    my $map_id = $fi->templatemap_id;
+    my $tmpl_id = $fi->template_id;
+    if ( $map_id ) {
+        my $map = MT::TemplateMap->load( $map_id );
+        if ( $map ) {
+            return unless $map->build_type;
+        }
+    } elsif ( $tmpl_id ) {
+        my $tmpl = MT::Template->load( $tmpl_id );
+        if ( $tmpl ) {
+            return unless $tmpl->build_type;
+        }
+    }
+}
+$pub->rebuild_from_fileinfo( $fi );
