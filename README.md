@@ -1,4 +1,4 @@
-# About RebuildOnDemand plugin for Movable Type
+# About Rebuild On Demand plugin for Movable Type
 
 ## Synopsis
 
