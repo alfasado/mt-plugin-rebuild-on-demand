@@ -69,8 +69,10 @@ MTML
         return unless $tmplate;
         my $site_url = $blog->site_url || '';
         $site_url .= '/' if $site_url !~ m!/$!;
-        my $url = $site_url . $tmplate->outfile;
-        $param->{ published_url } = $url;
+        if ( $tmplate->outfile ) {
+            my $url = $site_url . $tmplate->outfile;
+            $param->{ published_url } = $url;
+        }
     }
 }
 
